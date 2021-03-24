@@ -59,7 +59,7 @@ class Booking:
 class BookingPing:
     def __init__(self, url: str) -> None:
         super().__init__()
-        self.url = url + '/ping'
+        self.url = url + 'ping'
 
     def ping(self) -> Response:
         return requests.get(self.url)
