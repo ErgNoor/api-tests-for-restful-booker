@@ -1,0 +1,11 @@
+{
+    "firstname": "Yngwie",
+    "lastname": "Malmsteen",
+    "totalprice": 115,
+    "depositpaid": true,
+    "bookingdates": {
+        "checkin": "2021-05-01",
+        "checkout": "2021-05-15"
+    },
+    "additionalneeds": "Breakfast"
+}
