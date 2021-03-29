@@ -48,7 +48,7 @@ class Booking:
         return requests.put(self.booking_url, booking_id, json=json, headers=headers)
 
     def partial_update_booking(self, booking_id: int, json: Optional[dict] = None, headers: Optional[dict] = None):
-        return requests.patch(self.booking_url, booking_id, json=json, headers=headers)
+        return requests.patch(self.booking_url + str(booking_id), json=json, headers=headers)
 
     def delete_booking(self, booking_id: int, headers: Optional[dict] = None) -> Response:
         resp = requests.delete(self.booking_url + str(booking_id), headers=headers)
