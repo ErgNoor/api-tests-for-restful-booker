@@ -2,15 +2,7 @@ import requests
 
 from requests.models import Response
 
-import logging
-
-from typing import Optional, Union
-
-
-logging.basicConfig(
-    level=logging.INFO,
-)
-booking_logger = logging.getLogger(__name__)
+from typing import Optional
 
 
 class BookingAuth():
@@ -45,10 +37,10 @@ class Booking:
         return requests.post(self.booking_url, params=params, data=data, json=json, headers=headers)
 
     def update_booking(self, booking_id: int, json: Optional[dict] = None, headers: Optional[dict] = None):
-        return requests.put(self.booking_url, booking_id, json=json, headers=headers)
+        return requests.put(self.booking_url + str(booking_id), json=json, headers=headers)
 
     def partial_update_booking(self, booking_id: int, json: Optional[dict] = None, headers: Optional[dict] = None):
-        return requests.patch(self.booking_url, booking_id, json=json, headers=headers)
+        return requests.patch(self.booking_url + str(booking_id), json=json, headers=headers)
 
     def delete_booking(self, booking_id: int, headers: Optional[dict] = None) -> Response:
         resp = requests.delete(self.booking_url + str(booking_id), headers=headers)
