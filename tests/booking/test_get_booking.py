@@ -1,11 +1,12 @@
 from booking_service import Booking
 
 from jsonschema import validate
+from jsonschema.exceptions import ValidationError
 
 import pytest
 
 
-class TestBookingAuth:
+class TestGetBooking:
     @pytest.fixture
     def setup(self, base_url):
         self.booking = Booking(base_url)
@@ -54,7 +55,10 @@ class TestBookingAuth:
         resp = self.booking.get_booking(booking_id, headers={'Accept': 'application/json'})
 
         assert resp.status_code == 200
-        validate(resp.json(), schema)
+        try:
+            validate(resp.json(), schema)
+        except ValidationError as e:
+            assert False, e.message
 
     def test_get_booking_without_headers_should_return_booking(self, setup):
         schema = {
@@ -98,7 +102,10 @@ class TestBookingAuth:
         resp = self.booking.get_booking(5)
 
         assert resp.status_code == 200
-        validate(resp.json(), schema)
+        try:
+            validate(resp.json(), schema)
+        except ValidationError as e:
+            assert False, e.message
 
     def test_get_non_exist_booking_should_be_failed(self, setup):
         
