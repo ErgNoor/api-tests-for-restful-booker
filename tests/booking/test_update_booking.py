@@ -3,12 +3,12 @@ from booking_service import Booking, BookingAuth
 
 import json
 import pytest
-
+from requests.models import Response
 
 class TestUpdateBooking:
     @pytest.fixture
     def setup(self, base_url: str, pytestconfig):
-        self.url = base_url
+        self.url: str = base_url
         self.booking: Booking = Booking(base_url)
         body: dict = {}
 
@@ -19,7 +19,7 @@ class TestUpdateBooking:
         with open('data/booking.json', 'r') as f:
             body = json.load(f)
 
-        resp = self.booking.create_booking(
+        resp: Response = self.booking.create_booking(
             json=body,
             headers={
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ class TestUpdateBooking:
     def test_update_booking_should_be_success(self, setup):
         token_id: str = BookingAuth(self.url).auth(json=self.creds, headers={'Content-Type': 'application/json'}).json().get('token')
 
-        update_json = {
+        update_json: dict = {
                 "firstname" : "James",
                 "lastname" : "Brown",
                 "totalprice" : 111,
@@ -46,7 +46,7 @@ class TestUpdateBooking:
                 "additionalneeds" : "Girl"
         }
 
-        resp = self.booking.update_booking(
+        resp: Response = self.booking.update_booking(
             booking_id=self.booking_id,
             json=update_json,
             headers={
@@ -63,7 +63,7 @@ class TestUpdateBooking:
 
     def test_update_booking_without_auth_should_be_fail(self, setup):
 
-        update_json = {
+        update_json: dict = {
                 "firstname" : "James",
                 "lastname" : "Brown",
                 "totalprice" : 111,
@@ -75,7 +75,7 @@ class TestUpdateBooking:
                 "additionalneeds" : "Girl"
         }
 
-        resp = self.booking.update_booking(
+        resp: Response = self.booking.update_booking(
             booking_id=self.booking_id,
             json=update_json,
             headers={
