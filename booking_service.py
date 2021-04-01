@@ -11,9 +11,8 @@ class BookingAuth():
         self.base_url = base_url + 'auth'
         
 
-    def auth(self, path="/", params=None, data=None, json=None, headers=None) -> Response:
-        url = f'{self.base_url}{path}'
-        return requests.post(url=url, params=params, data=data, json=json, headers=headers)
+    def auth(self, params=None, data=None, json=None, headers=None) -> Response:
+        return requests.post(url=self.base_url, params=params, data=data, json=json, headers=headers)
 
 
 class Booking:
