@@ -18,16 +18,17 @@ allure serve .\allure_reports
 ## Run with docker
 
 ### Create docker image
-```docker build .```
+```docker build -t restful-booker .```
 
-**If you use allure:**
+**If you use allure:**\
+_Commands for linux_:
 ```
 mkdir allure_results
 
-docker run -v "$(pwd)"/allure_results:/usr/src/restful-booker/allure_results -t *container_id* pytest -v --alluredir=allure_results
+docker run -v "$(pwd)"/allure_results:/usr/src/restful-booker/allure_results -t restful-booker pytest -v --alluredir=allure_results
 
 allure serve .\allure_reports
 ```
 
 **If you use only pytest:**<br>
-```docker run -t *container_id* pytest -v```
+``` docker run -t restful-booker pytest -v```
